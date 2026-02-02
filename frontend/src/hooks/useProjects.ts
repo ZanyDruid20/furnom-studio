@@ -1,6 +1,3 @@
-import { useState, useEffect } from 'react';
-import { fetchRepos } from '@/lib/github';
-
 interface GitHubRepo {
   id: number;
   name: string;
@@ -8,6 +5,10 @@ interface GitHubRepo {
   language: string | null;
   html_url: string;
 }
+import { useState, useEffect } from 'react';
+import { fetchRepos } from '@/lib/github';
+
+
 
 interface Project {
   id: string;
@@ -35,7 +36,7 @@ export const useProjects = (): UseProjectsReturn => {
         const repos = await fetchRepos();
         
         // Transform GitHub repos to match ProjectCard interface
-        const transformed = repos.map((repo: any) => ({
+        const transformed = repos.map((repo: GitHubRepo & { techStack?: string[] }) => ({
           id: repo.id?.toString() || '',
           name: repo.name,
           description: repo.description || 'No description provided',
