@@ -19,12 +19,14 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8
 
 const fetchRepos = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/github/repos`);
+    const response = await axios.get(`${API_BASE_URL}/github/repos`, {
+      timeout: 8000, // 8 second timeout for faster failure
+    });
     // The backend returns { repos: [...] }
     return response.data.repos || [];
   } catch (error) {
     console.error('Error fetching repositories from backend:', error);
-    return [];
+    throw error; // Throw error for better error handling
   }
 };
 
