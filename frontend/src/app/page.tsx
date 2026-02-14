@@ -27,7 +27,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl font-bold mb-4 text-gray-900 text-left">Furnom Dam</h1>
           <p className="text-xl text-gray-700 mb-2 text-left">Computer Science Senior · University of Maryland, Baltimore County</p>
-          <p className="text-lg text-gray-600 mb-8 text-left">Interested in Software Engineering and AI/ML, building applications that solve real-world problems through innovative technology.</p>
+          <p className="text-lg text-gray-600 mb-8 text-left">Interests in Software Engineering and AI/ML, building applications that solve real-world problems through innovative technology.</p>
           <div className="flex flex-wrap gap-4 text-left">
             <a href="#projects" className="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition">View Projects</a>
             <a href="https://github.com/ZanyDruid20" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-white border border-gray-300 rounded-lg font-semibold text-gray-900 hover:bg-gray-100 transition flex items-center gap-2">

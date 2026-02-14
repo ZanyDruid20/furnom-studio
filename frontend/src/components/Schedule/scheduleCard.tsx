@@ -12,7 +12,7 @@ export default function ScheduleCard({
   title = "Schedule a Chat",
   description = "Book a 30-minute intro call to discuss opportunities, projects, or collaborations.",
   duration = "30 minutes",
-  meetingType = "Video call via Google Meet",
+  meetingType = "Video call via Calendly & Google Meet",
   bookingUrl = "https://calendly.com"
 }: ScheduleCardProps) {
   return (
