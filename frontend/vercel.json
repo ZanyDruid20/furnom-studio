@@ -1,8 +1,0 @@
-{
-  "crons": [
-    {
-      "path": "/api/cron/warm-backend",
-      "schedule": "*/10 * * * *"
-    }
-  ]
-}
