@@ -47,7 +47,7 @@ export const useProjects = (): UseProjectsReturn => {
 
         setLoading(true);
         const response = await axios.get('/api/projects', {
-          timeout: 8000, // Faster timeout
+          timeout: 15000, // Longer timeout to handle cold starts
         });
         
         const repos = response.data.repos || [];
@@ -96,7 +96,7 @@ export const useProjects = (): UseProjectsReturn => {
 
         setLoading(true);
         const response = await axios.get('/api/projects', {
-          timeout: 8000,
+          timeout: 15000, // Longer timeout to handle cold starts
         });
         
         const repos = response.data.repos || [];

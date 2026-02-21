@@ -28,9 +28,9 @@ class GitHubService:
         
         username = username or settings.GITHUB_USERNAME
         url = f"{self.base_url}/users/{username}/repos"
-        # Faster timeout and connection pooling
+        # Increased timeout to handle GitHub API latency
         async with httpx.AsyncClient(
-            timeout=8.0,
+            timeout=15.0,
             limits=httpx.Limits(max_connections=10, max_keepalive_connections=5)
         ) as client:
             response = await client.get(url, headers=self.headers)
