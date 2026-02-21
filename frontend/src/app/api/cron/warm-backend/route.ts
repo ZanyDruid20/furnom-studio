@@ -4,7 +4,7 @@ export async function GET() {
   try {
     const response = await fetch(`${apiUrl}/health`, {
       method: 'GET',
-      timeout: 10000
+      signal: AbortSignal.timeout(10000)
     });
 
     if (response.ok) {
