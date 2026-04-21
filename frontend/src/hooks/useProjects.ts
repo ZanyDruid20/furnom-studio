@@ -25,6 +25,10 @@ interface UseProjectsReturn {
   refetch: () => void;
 }
 
+const TECH_STACK_OVERRIDES: Record<string, string[]> = {
+  'expense-api': ['Golang', 'PostgreSQL', 'Docker', 'Terraform', 'AWS'],
+};
+
 export const useProjects = (): UseProjectsReturn => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -57,7 +61,9 @@ export const useProjects = (): UseProjectsReturn => {
           id: repo.id?.toString() || '',
           name: repo.name,
           description: repo.description || 'No description provided',
-          techStack: Array.isArray(repo.techStack) && repo.techStack.length > 0
+          techStack: TECH_STACK_OVERRIDES[repo.name]
+            ? TECH_STACK_OVERRIDES[repo.name]
+            : Array.isArray(repo.techStack) && repo.techStack.length > 0
             ? repo.techStack
             : (repo.language ? [repo.language] : []),
           githubUrl: repo.html_url,
@@ -105,7 +111,9 @@ export const useProjects = (): UseProjectsReturn => {
           id: repo.id?.toString() || '',
           name: repo.name,
           description: repo.description || 'No description provided',
-          techStack: Array.isArray(repo.techStack) && repo.techStack.length > 0
+          techStack: TECH_STACK_OVERRIDES[repo.name]
+            ? TECH_STACK_OVERRIDES[repo.name]
+            : Array.isArray(repo.techStack) && repo.techStack.length > 0
             ? repo.techStack
             : (repo.language ? [repo.language] : []),
           githubUrl: repo.html_url,
