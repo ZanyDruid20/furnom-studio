@@ -4,7 +4,8 @@ INCLUDED_PROJECTS = [
     "Chip8Emulator",
     "URLShortener",
     "accessibility-map-team3",
-    "GEPO"
+    "GEPO",
+    "expense-api"
 ]
 import httpx # type: ignore
 from app.core.settings import settings

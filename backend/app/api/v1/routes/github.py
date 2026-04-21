@@ -20,7 +20,8 @@ async def get_repositories():
             ],
             "accessibility-map-team3": ["FastAPI", "Python", "MySQL", "Docker", "JavaScript", "Railway"],
             "Chip8Emulator": ["C", "C++"],
-            "EventApp": ["C++"]
+            "EventApp": ["C++"],
+            "expense-api": ["Python", "FastAPI", "PostgreSQL", "Docker", "AWS"]
         }
         for repo in repos:
             repo["techStack"] = tech_map.get(repo["name"], [])
