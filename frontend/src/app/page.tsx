@@ -24,11 +24,11 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="hero" className="relative overflow-hidden px-6 pb-20 pt-28" aria-label="Hero">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(37,99,235,0.14),_transparent_32%),radial-gradient(circle_at_top_right,_rgba(15,118,110,0.10),_transparent_28%)]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(37,99,235,0.14),transparent_32%),radial-gradient(circle_at_top_right,rgba(15,118,110,0.10),transparent_28%)]" />
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="max-w-3xl">
             <span className="inline-flex items-center rounded-full border border-blue-200 bg-white/80 px-4 py-1 text-sm font-medium text-blue-700 shadow-sm backdrop-blur">
-              Open to software engineering roles and internships
+              Open to SWE roles and collaboration
             </span>
             <h1 className="mt-6 text-5xl font-semibold tracking-tight text-slate-950 sm:text-6xl">
               Furnom Dam
@@ -37,7 +37,7 @@ export default function Home() {
               Computer Science Senior · University of Maryland, Baltimore County
             </p>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              I build practical software with a bias toward clean UX, reliable systems, and AI/ML workflows that solve real problems.
+              I focus on building reliable systems that power applications, while also working on AI/ML projects that solve real problems.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a href="#projects" className="rounded-full bg-slate-950 px-6 py-3 font-semibold text-white shadow-lg shadow-slate-950/15 transition hover:-translate-y-0.5 hover:bg-slate-800">
@@ -65,19 +65,15 @@ export default function Home() {
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl bg-slate-950 p-5 text-white shadow-lg shadow-slate-950/10">
                   <p className="text-sm text-slate-300">Focus</p>
-                  <p className="mt-2 text-xl font-semibold">Shipping polished full-stack products</p>
-                </div>
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                  <p className="text-sm text-slate-500">Current stack</p>
-                  <p className="mt-2 text-xl font-semibold text-slate-900">Next.js, FastAPI, Docker</p>
+                  <p className="mt-2 text-xl font-semibold">Building reliable systems for applications</p>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
                   <p className="text-sm text-slate-500">Strength</p>
-                  <p className="mt-2 text-xl font-semibold text-slate-900">Fast iteration with clear structure</p>
+                  <p className="mt-2 text-xl font-semibold text-slate-900">AI/ML workflows with clear structure</p>
                 </div>
-                <div className="rounded-2xl bg-amber-50 p-5 ring-1 ring-amber-200">
+                <div className="rounded-2xl bg-amber-50 p-5 ring-1 ring-amber-200 sm:col-span-2">
                   <p className="text-sm text-amber-700">Available for</p>
-                  <p className="mt-2 text-xl font-semibold text-slate-900">Internships, SWE roles, collaborations</p>
+                  <p className="mt-2 text-xl font-semibold text-slate-900">SWE roles and collaboration</p>
                 </div>
               </div>
             </div>
