@@ -23,18 +23,23 @@ const skills = [
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="py-20 px-6 bg-white" aria-label="Technical skills">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="mb-8 text-gray-900 font-bold text-2xl" role="heading" aria-level={2}>Skills & Tech Stack</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <section id="skills" className="px-6 py-20" aria-label="Technical skills">
+      <div className="mx-auto max-w-6xl rounded-4xl border border-white/60 bg-white/75 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur sm:p-10">
+        <div className="mb-8 max-w-2xl">
+          <h2 className="text-2xl font-bold text-slate-950" role="heading" aria-level={2}>Skills & Tech Stack</h2>
+          <p className="mt-3 text-slate-600">
+            The tools and languages I reach for most when building reliable user-facing products and backend services.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {skills.map(({ category, items }) => (
-            <div key={category} className="bg-gray-50 rounded-xl p-6 shadow-sm">
-              <h3 className="font-bold text-xl mb-4 text-gray-900">{category}</h3>
+            <div key={category} className="rounded-2xl border border-slate-200 bg-slate-50/90 p-6 shadow-sm">
+              <h3 className="mb-4 text-xl font-bold text-slate-950">{category}</h3>
               <div className="flex flex-wrap gap-3">
                 {items.map((item) => (
                   <span
                     key={item}
-                    className="px-4 py-1 bg-gray-100 text-gray-800 rounded-lg text-base font-medium"
+                    className="rounded-full bg-white px-4 py-1 text-base font-medium text-slate-700 shadow-sm ring-1 ring-slate-200"
                   >
                     {item}
                   </span>

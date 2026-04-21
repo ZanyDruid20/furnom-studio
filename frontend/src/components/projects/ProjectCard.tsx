@@ -9,21 +9,21 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ name, description, techStack, githubUrl }: ProjectCardProps) {
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-      <div className="flex items-start justify-between mb-3">
-        <h3 className="text-xl font-semibold text-gray-900">{name}</h3>
+    <div className="group rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl">
+      <div className="mb-3 flex items-start justify-between gap-4">
+        <h3 className="text-xl font-semibold text-slate-950">{name}</h3>
         <a
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-400 hover:text-gray-900 transition-colors"
+          className="text-slate-400 transition-colors hover:text-slate-950"
           aria-label={`View ${name} on GitHub`}
         >
           <Github className="w-5 h-5" />
         </a>
       </div>
       
-      <p className="text-gray-600 mb-4 leading-relaxed">
+      <p className="mb-4 leading-relaxed text-slate-600">
         {description}
       </p>
       
@@ -31,7 +31,7 @@ export default function ProjectCard({ name, description, techStack, githubUrl }:
         {techStack.map((tech, index) => (
           <span
             key={`${tech}-${index}`}
-            className="px-3 py-1 bg-blue-50 text-blue-700 rounded-md text-sm"
+            className="rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700 transition-colors group-hover:bg-blue-50 group-hover:text-blue-700"
           >
             {tech}
           </span>

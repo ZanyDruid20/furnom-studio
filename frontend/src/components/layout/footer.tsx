@@ -1,15 +1,15 @@
 export default function Footer() {
   return (
-    <footer className="py-8 px-6 bg-white border-t border-gray-200">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-sm">© 2026 Furnom Dam. All rights reserved.</p>
+    <footer className="border-t border-white/70 bg-white/70 px-6 py-8 backdrop-blur">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <p className="text-sm text-slate-500">© 2026 Furnom Dam. Built with Next.js and Vercel.</p>
           <div className="flex items-center gap-6">
             <a 
               href="https://github.com/ZanyDruid20"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 hover:text-gray-900 transition-colors text-sm"
+              className="text-sm text-slate-500 transition-colors hover:text-slate-950"
             >
               GitHub
             </a>
@@ -17,13 +17,13 @@ export default function Footer() {
               href="https://www.linkedin.com/in/furnom-dam/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 hover:text-gray-900 transition-colors text-sm"
+              className="text-sm text-slate-500 transition-colors hover:text-slate-950"
             >
               LinkedIn
             </a>
             <a 
               href="mailto:furnomd1@umbc.edu"
-              className="text-gray-500 hover:text-gray-900 transition-colors text-sm"
+              className="text-sm text-slate-500 transition-colors hover:text-slate-950"
             >
               Email
             </a>

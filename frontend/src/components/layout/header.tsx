@@ -12,33 +12,34 @@ export default function Header() {
     };
 
     return (
-        <Disclosure as="nav" className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-b border-gray-200 z-50">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                <div className="flex items-center justify-between h-16">
+        <Disclosure as="nav" className="fixed left-0 right-0 top-0 z-50 border-b border-white/70 bg-white/75 backdrop-blur-xl shadow-sm">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6">
+                <div className="flex h-16 items-center justify-between">
                     <button 
                         onClick={() => scrollToSection('hero')} 
-                        className="font-bold text-gray-900 hover:text-blue-600 transition-colors"
+                        className="text-sm font-semibold tracking-wide text-slate-950 transition-colors hover:text-blue-700"
                     >
                         Furnom Dam
                     </button>
                     
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-8">
-                        <button onClick={() => scrollToSection('hero')} className="text-gray-600 hover:text-gray-900 transition-colors">Home</button>
-                        <button onClick={() => scrollToSection('projects')} className="text-gray-600 hover:text-gray-900 transition-colors">Projects</button>
-                        <button onClick={() => scrollToSection('schedule')} className="text-gray-600 hover:text-gray-900 transition-colors">Schedule</button>
+                    <div className="hidden items-center gap-2 md:flex">
+                        <button onClick={() => scrollToSection('hero')} className="rounded-full px-4 py-2 text-sm text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950">Home</button>
+                        <button onClick={() => scrollToSection('projects')} className="rounded-full px-4 py-2 text-sm text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950">Projects</button>
+                        <button onClick={() => scrollToSection('skills')} className="rounded-full px-4 py-2 text-sm text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950">Skills</button>
+                        <button onClick={() => scrollToSection('schedule')} className="rounded-full px-4 py-2 text-sm text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950">Schedule</button>
                         <a 
                             href="https://github.com/ZanyDruid20" 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-gray-600 hover:text-gray-900 transition-colors"
+                            className="rounded-full px-4 py-2 text-sm text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950"
                         >
                             GitHub
                         </a>
                     </div>
 
                     {/* Mobile menu button */}
-                    <DisclosureButton className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500">
+                    <DisclosureButton className="inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 md:hidden">
                         <span className="sr-only">Open main menu</span>
                         <Bars3Icon className="block h-6 w-6 group-data-open:hidden" />
                         <XMarkIcon className="hidden h-6 w-6 group-data-open:block" />
@@ -48,25 +49,32 @@ export default function Header() {
 
             {/* Mobile menu panel */}
             <DisclosurePanel className="md:hidden">
-                <div className="space-y-1 px-4 pb-3 pt-2">
+                <div className="space-y-1 border-t border-slate-200 bg-white/95 px-4 pb-3 pt-2 shadow-lg">
                     <DisclosureButton
                         as="button"
                         onClick={() => scrollToSection('hero')}
-                        className="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        className="block w-full rounded-md px-3 py-2 text-left text-base font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950"
                     >
                         Home
                     </DisclosureButton>
                     <DisclosureButton
                         as="button"
                         onClick={() => scrollToSection('projects')}
-                        className="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        className="block w-full rounded-md px-3 py-2 text-left text-base font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950"
                     >
                         Projects
                     </DisclosureButton>
                     <DisclosureButton
                         as="button"
+                        onClick={() => scrollToSection('skills')}
+                        className="block w-full rounded-md px-3 py-2 text-left text-base font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                    >
+                        Skills
+                    </DisclosureButton>
+                    <DisclosureButton
+                        as="button"
                         onClick={() => scrollToSection('schedule')}
-                        className="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        className="block w-full rounded-md px-3 py-2 text-left text-base font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950"
                     >
                         Schedule
                     </DisclosureButton>
@@ -74,7 +82,7 @@ export default function Header() {
                         href="https://github.com/ZanyDruid20"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        className="block rounded-md px-3 py-2 text-base font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950"
                     >
                         GitHub
                     </a>
