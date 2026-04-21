@@ -1,14 +1,6 @@
-INCLUDED_PROJECTS = [
-    "EventApp",
-    "Studivio",
-    "Chip8Emulator",
-    "URLShortener",
-    "accessibility-map-team3",
-    "GEPO",
-    "expense-api"
-]
 import httpx # type: ignore
 from app.core.settings import settings
+from app.core.featured_projects import FEATURED_PROJECT_ORDER
 from typing import List, Dict, Any
 from datetime import datetime, timedelta
 
@@ -38,7 +30,12 @@ class GitHubService:
             response.raise_for_status()
             repos = response.json()
             # Only include whitelisted projects (reduces payload size)
-            filtered = [repo for repo in repos if repo["name"] in INCLUDED_PROJECTS]
+            featured_project_names = set(FEATURED_PROJECT_ORDER)
+            filtered = [repo for repo in repos if repo["name"] in featured_project_names]
+
+            # Keep portfolio cards in a predictable order
+            sort_order = {name: index for index, name in enumerate(FEATURED_PROJECT_ORDER)}
+            filtered.sort(key=lambda repo: sort_order.get(repo["name"], len(FEATURED_PROJECT_ORDER)))
             
             # Cache the results for 30 minutes
             self._cache = filtered

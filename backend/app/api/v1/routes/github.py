@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from app.services.github_service import GitHubService
 from app.db.session import get_supabase
+from app.core.featured_projects import FEATURED_PROJECTS
 
 # create router and github service instance
 router = APIRouter()
@@ -11,20 +12,15 @@ github_service = GitHubService()
 async def get_repositories():
     try:
         repos = await github_service.fetch_user_repos()
-        tech_map = {
-            "Studivio": ["Python", "JavaScript", "Flask", "MongoDB", "React"],
-            "URLShortener": ["Golang", "Redis", "MySQL", "AWS EC2", "AWS RDS", "Gin Web Framework"],
-            "GEPO": [
-                "JavaScript", "TypeScript", "Node.js", "Express.js", "Next.js", "GraphQL", "Passport.js", "Tailwind CSS", "GCP (Backend hosting)",
-                "Vercel (frontend hosting)", "GitHub Actions (CI/CD)", "Docker"
-            ],
-            "accessibility-map-team3": ["FastAPI", "Python", "MySQL", "Docker", "JavaScript", "Railway"],
-            "Chip8Emulator": ["C", "C++"],
-            "EventApp": ["C++"],
-            "expense-api": ["Python", "FastAPI", "PostgreSQL", "Docker", "AWS"]
-        }
         for repo in repos:
-            repo["techStack"] = tech_map.get(repo["name"], [])
+            project_config = FEATURED_PROJECTS.get(repo["name"], {})
+            repo["techStack"] = project_config.get("techStack", [])
+
+            # Optional description override from config when needed
+            description_override = project_config.get("description")
+            if description_override:
+                repo["description"] = description_override
+
             # Use GitHub description as-is; fallback if missing
             if not repo.get("description") or repo["description"].strip() == "":
                 repo["description"] = "No description provided"
