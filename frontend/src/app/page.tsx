@@ -69,7 +69,7 @@ export default function Home() {
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
                   <p className="text-sm text-slate-500">Strength</p>
-                  <p className="mt-2 text-xl font-semibold text-slate-900">AI/ML workflows with clear structure</p>
+                  <p className="mt-2 text-xl font-semibold text-slate-900">Backend, Full-Stack & Systems, AI/ML</p>
                 </div>
                 <div className="rounded-2xl bg-amber-50 p-5 ring-1 ring-amber-200 sm:col-span-2">
                   <p className="text-sm text-amber-700">Available for</p>

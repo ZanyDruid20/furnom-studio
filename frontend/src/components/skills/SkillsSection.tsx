@@ -4,19 +4,23 @@
 const skills = [
   {
     category: "Languages",
-    items: ["Python", "C/C++", "JavaScript", "Go", "SQL", "C#", "TypeScript"]
+    items: ["Python", "C/C++", "JavaScript", "Go", "SQL", "TypeScript"]
   },
   {
     category: "Frameworks",
-    items: ["Flask", "React", "Tailwind", "Gin", "FastAPI", "Node", "Express", "GraphQL", "NextJS"]
+    items: ["Flask", "FastAPI", "Node.js", "Express.js", "React.js", "Next.js", "GraphQL"]
   },
   {
     category: "Databases",
-    items: ["MongoDB", "Redis", "MySQL"]
+    items: ["MongoDB", "Redis", "MySQL", "PostgreSQL"]
+  },
+  {
+    category: "Cloud/DevOps",
+    items: ["AWS", "GCP", "Docker", "GitHub Actions", "Railway", "Vercel"]
   },
   {
     category: "Tools",
-    items: ["Git", "Docker", "Linux", "AWS", "Jira", "Jest", "Unittest", "Postman", "Swagger", "Railway", "GCP", "Vercel", "GitHub Actions"]
+    items: ["Git", "Linux", "Jest", "Postman", "Terraform"]
   }
 ];
 
