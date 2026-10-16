@@ -64,7 +64,8 @@ test('cards expose all achievements and direct repository actions without detail
   assert.ok(!html.includes('href="/projects/'));
   assert.ok(!/case study/i.test(html));
   assert.equal((html.match(/<li>/g) || []).length, project.achievements.length);
-  assert.ok(!html.includes('Live demo'));
+  assert.equal(html.includes('Live demo'), Boolean(project.liveDemoUrl));
+  if (project.liveDemoUrl) assert.ok(html.includes(`href="${project.liveDemoUrl}"`));
  }
 });
 test('unavailable external actions are omitted and provided demo URLs are used directly', () => {

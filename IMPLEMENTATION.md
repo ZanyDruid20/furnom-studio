@@ -4,7 +4,7 @@
 
 - Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, npm, Geist, Lucide, and Vercel Analytics are retained.
 - The homepage shows four featured projects. `/projects` shows all nine with combined search and category filtering, result announcements, and a resettable empty state.
-- Shared project cards contain a description, technology stack, two engineering achievements, relevant measurement caveats, and verified GitHub links. A live demo action appears only when a verified URL is supplied; none are currently configured.
+- Shared project cards contain a description, technology stack, two engineering achievements, relevant measurement caveats, and verified GitHub links. A live demo action appears only when a verified URL is supplied; SignalRetention uses the live URL supplied by the owner: https://signal-retention.vercel.app/.
 - Dedicated project detail routes, case-study navigation, diagram previews, and their unused styling were removed after checking dependencies. The typed catalog now contains only listing content and external-link fields.
 - The warm ivory/slate palette, responsive grid, hover/focus states, and reduced-motion support remain intact. The exact personal hero headline is preserved.
 - Contact links use `dfurnom@gmail.com`. The existing resume, LinkedIn, GitHub, and Calendly links remain available.

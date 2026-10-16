@@ -71,6 +71,7 @@ export const projects: Project[] = [
         ],
         "achievementNote": "Author-reported in portfolio brief; benchmark artifacts pending confirmation.",
         "repo": "SignalRetention",
+        "liveDemoUrl": "https://signal-retention.vercel.app/",
         "featured": true
     },
     {
