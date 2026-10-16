@@ -1,5 +1,6 @@
 export const categories = ['All Projects', 'AI / Machine Learning', 'Backend Engineering', 'Distributed Systems / Infrastructure', 'Full-Stack Applications', 'Systems Programming'] as const;
 export type Category = typeof categories[number];
+
 export interface Project {
     slug: string;
     name: string;
@@ -7,49 +8,236 @@ export interface Project {
     filters: Category[];
     description: string;
     stack: string[];
-    metric: string;
-    metricLabel: string;
-    metricNote?: string;
-    repo: string;
+    achievements: [string, string?];
+    achievementNote?: string;
+    /** Repository name verified against the existing project sources. */
+    repo?: string;
+    /** Add only after verifying an actual live application URL. */
+    liveDemoUrl?: string;
     featured?: boolean;
-    problem: string;
-    architecture: string[];
-    contributions: string[];
-    decisions: string;
-    challenge?: string;
-    lesson?: string;
-    results: string[];
 }
+
 export const projects: Project[] = [
     {
-        slug: 'distributed-rag-inference', name: 'Distributed AI Inference System', category: 'AI Infrastructure / Distributed Systems', filters: ['AI / Machine Learning', 'Backend Engineering', 'Distributed Systems / Infrastructure'], description: 'Independent retrieval, orchestration, and inference services. Grounded answers backed by GPU inference.', stack: ['Python', 'FastAPI', 'Docker', 'Kubernetes', 'GCP', 'vLLM', 'NVIDIA CUDA'], metric: '2,007', metricLabel: 'output tokens / sec', metricNote: 'Direct vLLM benchmark; not end-to-end RAG throughput.', repo: 'distributed-rag-inference', featured: true, problem: 'Build a retrieval-augmented generation system with independently deployable application services and an external GPU inference server.', architecture: ['Client', 'FastAPI gateway', 'Retrieval + in-memory vectors', 'Inference service', 'External vLLM / NVIDIA A40'], contributions: ['Built three async FastAPI services with reusable HTTP clients, timeouts, and upstream error handling.', 'Implemented overlapping document chunks, batch embeddings, cosine similarity, and top-K retrieval.', 'Constructed grounded prompts with numbered source context.', 'Deployed and validated containerized services on GKE with service discovery, health probes, resource controls, and non-root security contexts; the validation cluster was subsequently deleted.'], decisions: 'Keep GPU inference external to the application deployment. Use process-local retrieval storage for the current single-replica implementation; documents are lost on restart. Generation is non-streaming.', challenge: 'External service failures are handled with explicit timeouts and safe 502/504 responses. Health probes check process liveness rather than model readiness.', results: ['Qwen2.5-1.5B-Instruct on NVIDIA A40: 2,007.1 output tokens/sec and 20.31 requests/sec at concurrency 20.', '1.052 seconds p95 latency; 100/100 benchmark requests completed.', 'Repository reports 154 passing automated tests with external dependencies mocked.'], lesson: 'Personal retrospective pending confirmation. Persistent retrieval state and end-to-end RAG load tests are documented next steps.'
+        "slug": "distributed-rag-inference",
+        "name": "Distributed AI Inference System",
+        "category": "AI Infrastructure / Distributed Systems",
+        "filters": [
+            "AI / Machine Learning",
+            "Backend Engineering",
+            "Distributed Systems / Infrastructure"
+        ],
+        "description": "Independent retrieval, orchestration, and inference services. Grounded answers backed by GPU inference.",
+        "stack": [
+            "Python",
+            "FastAPI",
+            "Docker",
+            "Kubernetes",
+            "GCP",
+            "vLLM",
+            "NVIDIA CUDA"
+        ],
+        "achievements": [
+            "Built three independently deployable FastAPI services and 154 automated tests.",
+            "Served Qwen2.5-1.5B-Instruct on an NVIDIA A40 at 2,007 output tokens/sec and 20.31 requests/sec at concurrency 20."
+        ],
+        "achievementNote": "Direct vLLM benchmark; not end-to-end RAG throughput.",
+        "repo": "distributed-rag-inference",
+        "featured": true
     },
     {
-        slug: 'signal-retention', name: 'SignalRetention', category: 'AI Applications / Full-Stack Engineering', filters: ['AI / Machine Learning', 'Full-Stack Applications', 'Backend Engineering'], description: 'Customer retention intelligence with churn prediction, explainable results, and efficient data ingestion.', stack: ['Next.js', 'TypeScript', 'FastAPI', 'PostgreSQL', 'XGBoost', 'SHAP', 'Google Cloud Storage', 'Clerk'], metric: '96%', metricLabel: 'less processing time', metricNote: 'Author-reported in portfolio brief; benchmark artifacts pending confirmation.', repo: 'SignalRetention', featured: true, problem: 'Help businesses identify customers at risk of leaving and understand the factors behind a churn prediction.', architecture: ['Customer data ingestion', 'FastAPI + PostgreSQL', 'XGBoost predictions', 'SHAP explanations', 'Next.js analytics'], contributions: ['Built customer ingestion and analytics workflows.', 'Integrated churn prediction and explainable prediction workflows.', 'Used bulk inserts and set-based queries to improve database processing.', 'Implemented authentication and authorization.'], decisions: 'Use bulk database operations to reduce repeated per-record work. Implementation details are supplied by the author; the public README currently provides only a short overview.', results: ['Author-reported: 7,043 records processed in 5.2 seconds, down from 134 seconds.', 'No claim of actual customer churn reduction or verified production deployment.']
+        "slug": "signal-retention",
+        "name": "SignalRetention",
+        "category": "AI Applications / Full-Stack Engineering",
+        "filters": [
+            "AI / Machine Learning",
+            "Full-Stack Applications",
+            "Backend Engineering"
+        ],
+        "description": "Customer retention intelligence with churn prediction, explainable results, and efficient data ingestion.",
+        "stack": [
+            "Next.js",
+            "TypeScript",
+            "FastAPI",
+            "PostgreSQL",
+            "XGBoost",
+            "SHAP",
+            "Google Cloud Storage",
+            "Clerk"
+        ],
+        "achievements": [
+            "Improved slow dataset uploads with bulk processing and set-based database queries.",
+            "Processed 7,043 customer records in 5.2 seconds, down from 134 seconds (author-reported)."
+        ],
+        "achievementNote": "Author-reported in portfolio brief; benchmark artifacts pending confirmation.",
+        "repo": "SignalRetention",
+        "featured": true
     },
     {
-        slug: 'expense-api', name: 'EXPENSE-API', category: 'Backend Engineering / Cloud Infrastructure', filters: ['Backend Engineering', 'Distributed Systems / Infrastructure'], description: 'A layered Go API for shared expenses, with PostgreSQL, gateway rate limiting, and infrastructure as code.', stack: ['Go', 'Python', 'PostgreSQL', 'Kong', 'AWS', 'Terraform', 'Docker'], metric: '100k', metricLabel: 'records in load tests', metricNote: 'Load-test volume supplied by the author; benchmark artifacts pending confirmation.', repo: 'expense-api', featured: true, problem: 'Manage shared expenses, groups, and settlements through a maintainable backend API.', architecture: ['Kong API Gateway', 'Go / Gin handlers', 'Business services', 'PostgreSQL repositories', 'AWS S3 file storage'], contributions: ['Built REST endpoints with separate handler, service, and repository layers.', 'Integrated PostgreSQL, JWT authentication, and pre-signed S3 file access.', 'Configured Kong rate limiting and Terraform infrastructure.', 'Developed Python load-testing workflows against 100,000 records (author-reported).'], decisions: 'Separate HTTP parsing, business rules, and database access so each layer can be extended and debugged independently.', results: ['Repository documents expense, group, and user management, S3 file operations, and infrastructure configuration.', '100,000-record test volume is author-reported; throughput and latency are not asserted.']
+        "slug": "expense-api",
+        "name": "EXPENSE-API",
+        "category": "Backend Engineering / Cloud Infrastructure",
+        "filters": [
+            "Backend Engineering",
+            "Distributed Systems / Infrastructure"
+        ],
+        "description": "A layered Go API for shared expenses, with PostgreSQL, gateway rate limiting, and infrastructure as code.",
+        "stack": [
+            "Go",
+            "Python",
+            "PostgreSQL",
+            "Kong",
+            "AWS",
+            "Terraform",
+            "Docker"
+        ],
+        "achievements": [
+            "Developed Python load tests against 100,000 records (author-reported).",
+            "Integrated Kong rate limiting and automated AWS infrastructure with Terraform."
+        ],
+        "achievementNote": "Load-test volume supplied by the author; benchmark artifacts pending confirmation.",
+        "repo": "expense-api",
+        "featured": true
     },
     {
-        slug: 'rl-cluster-scheduler', name: 'RL Cluster Scheduler', category: 'Machine Learning / Infrastructure Optimization', filters: ['AI / Machine Learning', 'Distributed Systems / Infrastructure'], description: 'A PPO scheduling agent evaluated against FIFO, Round Robin, and resource-aware cluster schedulers.', stack: ['Python', 'Gymnasium', 'Stable-Baselines3', 'PPO'], metric: '4.4%', metricLabel: 'lower simulated cost', metricNote: 'Author-reported comparison on 30-job workloads; lower throughput is a documented trade-off.', repo: 'RL-cluster-scheduler', featured: true, problem: 'Explore whether reinforcement learning can allocate jobs across resource-constrained workers at lower infrastructure cost.', architecture: ['Simulated job queue', 'Gymnasium environment', 'PPO scheduling policy', 'Worker resources', 'Evaluation metrics'], contributions: ['Modeled CPU, memory, runtime, and priority for queued jobs.', 'Built a custom Gymnasium environment and trained a PPO agent.', 'Compared completed jobs, throughput, cost, utilization, and wait time against heuristic baselines.'], decisions: 'Compare a learned policy with strong heuristic baselines using simulated workloads. Reward design determines the cost and throughput trade-off.', challenge: 'The policy completed the workload at lower cost, but also lower throughput and worker utilization. Larger workloads and reward tuning remain future work.', results: ['Author-reported: 4.4% lower average infrastructure cost on 30-job workloads.', 'README confirms the cost/throughput trade-off, but does not publish the 4.4% figure.']
+        "slug": "rl-cluster-scheduler",
+        "name": "RL Cluster Scheduler",
+        "category": "Machine Learning / Infrastructure Optimization",
+        "filters": [
+            "AI / Machine Learning",
+            "Distributed Systems / Infrastructure"
+        ],
+        "description": "A PPO scheduling agent evaluated against FIFO, Round Robin, and resource-aware cluster schedulers.",
+        "stack": [
+            "Python",
+            "Gymnasium",
+            "Stable-Baselines3",
+            "PPO"
+        ],
+        "achievements": [
+            "Built a custom Gymnasium environment and trained a PPO agent against heuristic baselines.",
+            "Reduced simulated infrastructure cost by 4.4% on 30-job workloads (author-reported), with lower throughput."
+        ],
+        "achievementNote": "Author-reported comparison on 30-job workloads; lower throughput is a documented trade-off.",
+        "repo": "RL-cluster-scheduler",
+        "featured": true
     },
     {
-        slug: 'gepo', name: 'GEPO', category: 'Full-Stack / Backend Engineering', filters: ['Full-Stack Applications', 'Backend Engineering'], description: 'GitHub activity transformed into repository, commit, and language insights with Redis-backed caching.', stack: ['Node.js', 'Next.js', 'TypeScript', 'Redis', 'MongoDB', 'Docker', 'GitHub Actions'], metric: '95%', metricLabel: 'cache hit rate', metricNote: 'Cache hit rate supplied by the author; README confirms Redis caching and 68 passing tests.', repo: 'GEPO', problem: 'Turn GitHub activity into useful developer summaries while limiting repeated upstream API requests.', architecture: ['Next.js dashboard', 'GraphQL / Apollo', 'Node.js + Express', 'Redis cache', 'MongoDB / GitHub API'], contributions: ['Built repository, commit, and language analytics.', 'Implemented GitHub OAuth, account management, and cookie-forwarding API proxies.', 'Added Redis caching, sensitive endpoint rate limits, Docker, and CI/CD.'], decisions: 'Cache repeated GitHub queries in Redis and expose structured analytics through GraphQL.', results: ['README reports 68/68 Jest tests passing across middleware, services, routes, and resolvers.', '95% cache hit rate is author-reported in the portfolio brief.']
+        "slug": "gepo",
+        "name": "GEPO",
+        "category": "Full-Stack / Backend Engineering",
+        "filters": [
+            "Full-Stack Applications",
+            "Backend Engineering"
+        ],
+        "description": "GitHub activity transformed into repository, commit, and language insights with Redis-backed caching.",
+        "stack": [
+            "Node.js",
+            "Next.js",
+            "TypeScript",
+            "Redis",
+            "MongoDB",
+            "Docker",
+            "GitHub Actions"
+        ],
+        "achievements": [
+            "Developed 68 Jest tests covering middleware, services, routes, and GraphQL resolvers.",
+            "Used Redis caching to reduce repeated GitHub API calls; 95% cache hit rate is author-reported."
+        ],
+        "achievementNote": "Cache hit rate supplied by the author; README confirms Redis caching and 68 passing tests.",
+        "repo": "GEPO"
     },
     {
-        slug: 'studivio', name: 'Studivio', category: 'AI Applications / Full-Stack Engineering', filters: ['AI / Machine Learning', 'Full-Stack Applications'], description: 'An AI study assistant that turns documents and audio into organized, searchable study notes.', stack: ['Python', 'Flask', 'React', 'MongoDB', 'OpenAI API', 'AssemblyAI'], metric: '60', metricLabel: 'page PDFs supported', metricNote: 'Document and audio limits supplied by the author; repository describes an evolving prototype.', repo: 'Studivio', problem: 'Make educational documents and recordings easier to process, summarize, and review.', architecture: ['React notes interface', 'Flask + JWT', 'PDF / audio processing', 'OpenAI / AssemblyAI', 'MongoDB notes'], contributions: ['Built manual notes, document extraction, AI summaries, and voice transcription.', 'Implemented note search, organization, tasks, and JWT authentication.', 'Added loading states and error handling for long-running AI workflows.'], decisions: 'Expose processing progress in the interface while separating AI processing from note management.', challenge: 'README documents CORS and JWT integration fixes, async workflow handling, and module reorganization to address circular imports.', results: ['Author-reported support for PDFs up to 60 pages and audio up to one hour.', 'Repository identifies the application as an actively developed prototype.']
+        "slug": "studivio",
+        "name": "Studivio",
+        "category": "AI Applications / Full-Stack Engineering",
+        "filters": [
+            "AI / Machine Learning",
+            "Full-Stack Applications"
+        ],
+        "description": "An AI study assistant that turns documents and audio into organized, searchable study notes.",
+        "stack": [
+            "Python",
+            "Flask",
+            "React",
+            "MongoDB",
+            "OpenAI API",
+            "AssemblyAI"
+        ],
+        "achievements": [
+            "Built AI document summaries and audio transcription with OpenAI and AssemblyAI.",
+            "Supported PDFs up to 60 pages and audio up to one hour (author-reported prototype limits)."
+        ],
+        "achievementNote": "Document and audio limits supplied by the author; repository describes an evolving prototype.",
+        "repo": "Studivio"
     },
     {
-        slug: 'accessibility-map', name: 'Accessibility Map', category: 'Full-Stack Engineering / Mapping', filters: ['Full-Stack Applications', 'Backend Engineering'], description: 'Campus accessibility navigation with persistent route data and a backend built as part of a team.', stack: ['Python', 'FastAPI', 'MySQL', 'JavaScript', 'Railway'], metric: '<200ms', metricLabel: 'latency in testing', repo: 'accessibility-map-team3', problem: 'Help campus visitors and students with mobility needs navigate accessible paths between buildings.', architecture: ['Campus navigation UI', 'FastAPI backend', 'Routing constraints', 'MySQL / MariaDB'], contributions: ['Worked as one of two backend engineers on a team project.', 'Built authentication logic, routing constraints, and database schema.', 'Independently deployed and stabilized the FastAPI backend on Railway.'], decisions: 'Persist accessibility nodes and routing constraints in a relational database.', challenge: 'Resolved backend configuration and runtime issues identified during collaborative team testing.', results: ['300+ accessibility nodes across 17+ buildings.', 'README reports 614+ API calls during testing, latency below 200 ms, and 0% error rate after final fixes.']
+        "slug": "accessibility-map",
+        "name": "Accessibility Map",
+        "category": "Full-Stack Engineering / Mapping",
+        "filters": [
+            "Full-Stack Applications",
+            "Backend Engineering"
+        ],
+        "description": "Campus accessibility navigation with persistent route data and a backend built as part of a team.",
+        "stack": [
+            "Python",
+            "FastAPI",
+            "MySQL",
+            "JavaScript",
+            "Railway"
+        ],
+        "achievements": [
+            "Built authentication, routing constraints, and schema for 300+ accessibility nodes across 17+ buildings as one of two backend engineers.",
+            "Independently deployed and stabilized the backend on Railway; testing recorded 614+ API calls with latency below 200 ms."
+        ],
+        "repo": "accessibility-map-team3"
     },
     {
-        slug: 'chip-8', name: 'CHIP-8 Emulator', category: 'Systems Programming', filters: ['Systems Programming'], description: 'A virtual machine in C, from opcode decoding and registers to keyboard input and SDL2 graphics.', stack: ['C', 'SDL2'], metric: '64 x 32', metricLabel: 'pixel display', repo: 'Chip8Emulator', problem: 'Understand computer architecture by implementing a CHIP-8 instruction interpreter and its input/output behavior.', architecture: ['ROM input', 'Fetch / decode / execute', 'Memory + registers', 'Timers + keypad', 'SDL2 display'], contributions: ['Implemented opcode decoding and the fetch-decode-execute cycle.', 'Managed virtual memory, registers, fonts, timers, and keyboard state.', 'Rendered sprites through SDL2 and supported ROM execution.'], decisions: 'Use modular C to separate machine state, instruction handling, input, and rendering.', challenge: 'README documents opcode branching, shared state, graphical timing, and preserving font memory after reset.', results: ['Core CHIP-8 instruction execution with SDL2 graphics and keyboard input.', 'Completed for the CMSC 411 Computer Architecture course at UMBC.']
+        "slug": "chip-8",
+        "name": "CHIP-8 Emulator",
+        "category": "Systems Programming",
+        "filters": [
+            "Systems Programming"
+        ],
+        "description": "A virtual machine in C, from opcode decoding and registers to keyboard input and SDL2 graphics.",
+        "stack": [
+            "C",
+            "SDL2"
+        ],
+        "achievements": [
+            "Implemented instruction decoding, the fetch-decode-execute cycle, memory, and registers in C.",
+            "Rendered a 64 x 32 display with SDL2 and supported ROM execution, keyboard input, and timers."
+        ],
+        "repo": "Chip8Emulator"
     },
     {
-        slug: 'portfolio', name: 'Personal Developer Portfolio', category: 'Full-Stack Engineering', filters: ['Full-Stack Applications', 'Backend Engineering'], description: 'This portfolio: a typed project catalog, reusable case studies, and preserved GitHub-backed services.', stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Supabase', 'GitHub API'], metric: '9', metricLabel: 'engineering case studies', repo: 'furnom-studio', problem: 'Present engineering work clearly while preserving a full-stack portfolio and its existing integrations.', architecture: ['Next.js App Router', 'Typed project catalog / pages', 'Next.js API proxy', 'FastAPI GitHub service', 'Supabase sync'], contributions: ['Built responsive project pages with combined search and category filtering.', 'Centralized project content in a strongly typed catalog.', 'Preserved backend GitHub fetching, Supabase synchronization, webhooks, health checks, and warm-up routes.'], decisions: 'Render curated content independently of backend availability. Keep dynamic GitHub data available through the existing API rather than blocking the portfolio on a cold start.', results: ['Nine project case studies and four featured homepage projects.', 'Verified repository stack: Next.js, TypeScript, Tailwind, FastAPI, Supabase integration, and GitHub API. Hosting status was not independently verified.']
+        "slug": "portfolio",
+        "name": "Personal Developer Portfolio",
+        "category": "Full-Stack Engineering",
+        "filters": [
+            "Full-Stack Applications",
+            "Backend Engineering"
+        ],
+        "description": "A full-stack developer portfolio with searchable project cards and GitHub-backed services.",
+        "stack": [
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "FastAPI",
+            "Supabase",
+            "GitHub API"
+        ],
+        "achievements": [
+            "Built a typed nine-project catalog with combined search and category filtering.",
+            "Preserved GitHub API integration, FastAPI services, and Supabase synchronization."
+        ],
+        "repo": "furnom-studio"
     }
 ];
-export const githubUrl = (project: Project) => `https://github.com/ZanyDruid20/${project.repo}`;
+
+export const githubUrl = (project: Project) => project.repo ? `https://github.com/ZanyDruid20/${project.repo}` : undefined;
+
 /** Apply category and text constraints together; preserve the curated catalog order. */
 export function filterProjects(query: string, category: Category): Project[] {
     const needle = query.trim().toLowerCase();

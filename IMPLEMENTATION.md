@@ -1,36 +1,30 @@
-﻿# Portfolio redesign
+# Portfolio implementation
 
-## Architecture audit
+## Current presentation
 
-The existing frontend uses Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, npm, Geist fonts, Lucide, and Vercel Analytics. The separate Python/FastAPI backend fetches GitHub repositories, supports Supabase synchronization, and exposes signed webhook and health endpoints. Next.js retains its project proxy, health route, and backend warm-up route. There were no existing automated test scripts.
+- Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, npm, Geist, Lucide, and Vercel Analytics are retained.
+- The homepage shows four featured projects. `/projects` shows all nine with combined search and category filtering, result announcements, and a resettable empty state.
+- Shared project cards contain a description, technology stack, two engineering achievements, relevant measurement caveats, and verified GitHub links. A live demo action appears only when a verified URL is supplied; none are currently configured.
+- Dedicated project detail routes, case-study navigation, diagram previews, and their unused styling were removed after checking dependencies. The typed catalog now contains only listing content and external-link fields.
+- The warm ivory/slate palette, responsive grid, hover/focus states, and reduced-motion support remain intact. The exact personal hero headline is preserved.
+- Contact links use `dfurnom@gmail.com`. The existing resume, LinkedIn, GitHub, and Calendly links remain available.
 
-The original homepage loaded project cards from the backend. The redesigned pages render a curated typed catalog without requiring the backend to be available. Existing API routes, fetching hooks, backend services, deployment configuration, dependencies, resume PDF, email, social links, and Calendly booking URL remain available. Backend connectivity and database operations were not exercised against production.
+## Content sources
 
-## Implementation
+Repository names and descriptions were previously checked against the project's GitHub READMEs. No new repository or live demo URLs were invented.
 
-- Dark charcoal design with blue-violet accents, Geist typography, responsive cards and system illustrations made with HTML/CSS.
-- Homepage: four featured projects, about, six skill groups, education, contact, and scheduling.
-- `/projects`: exactly nine projects, combined category and text filtering, result announcements, and resettable empty state.
-- `/projects/[slug]`: nine statically generated case studies with overview, problem, conceptual architecture, contributions, design decisions, implementation, challenges, results, lessons, and related work.
-- Shared sticky navigation, mobile disclosure, footer, skip link, focus indicators, reduced-motion support, metadata, and custom not-found page.
-- Central content: `frontend/src/lib/projects.ts`. Shared presentation: `PortfolioCard`. Client interaction: `ProjectExplorer`.
-- `npm test` checks catalog integrity, required featured projects, filtering combinations, case-study content, and benchmark caveats.
+The inference throughput describes direct vLLM serving on an external NVIDIA A40, not end-to-end RAG throughput. SignalRetention's slow-upload challenge is represented directly on its card: bulk processing and set-based queries. Other author-reported metrics retain their caveats, including the scheduler's lower-throughput trade-off. Accessibility Map credits the backend team context and describes nodes, rather than routes.
 
-## Content provenance and remaining confirmation
+## Preserved architecture
 
-Project descriptions were checked against the GitHub READMEs for distributed-rag-inference, SignalRetention, RL-cluster-scheduler, expense-api, GEPO, Studivio, accessibility-map-team3, and Chip8Emulator. Portfolio technologies were checked locally.
-
-The inference project uses the supplied title **Distributed AI Inference System**. Its 2,007 tokens/sec, 20.31 requests/sec, 1.052s p95, and 100/100 successes describe direct vLLM serving at concurrency 20, not full RAG throughput. The external A40/vLLM server was separate from GKE. The README reports 154 passing tests and deletion of the validation cluster.
-
-The SignalRetention timing improvement, EXPENSE-API load-test volume, scheduler 4.4% cost result, GEPO cache-hit figure, and Studivio size limits come from the author's brief; public READMEs do not independently substantiate all of these numbers. They are marked author-reported. The scheduler case study includes its documented lower-throughput trade-off. Accessibility Map describes 300+ nodes, rather than incorrectly presenting them as routes, and credits the team context.
-
-Missing personal retrospectives and specific challenges have explicit pending-confirmation text. No live demo URLs were fabricated. No active production hosting is asserted. The existing resume file was preserved without changing its contents.
+The curated frontend catalog renders without backend availability. Existing Next.js API routes, fetching hooks, FastAPI GitHub services, Supabase synchronization, signed webhooks, health checks, backend warm-up route, deployment configuration, and dependencies remain unchanged. Production backend/database operations were not exercised.
 
 ## Verification
 
-- ESLint and TypeScript checks passed.
-- Five catalog/filter tests passed.
-- Production build passed and generated all nine case studies. The existing GitHub proxy logged an upstream timeout during prerendering; the build completed successfully and catalog pages are independent of that service.
-- HTTP 200 verified for the homepage, project archive, nine case studies, and resume.
-- Browser tool returned no connected browsers; visual, interactive mobile, and keyboard browser QA remain unverified.
-- Local changes only; no commit, push, or hosting change was performed.
+- ESLint, standalone TypeScript check, seven catalog/card tests, and the production build passed.
+- Generated route manifest includes `/projects` and excludes the removed detail route.
+- Cleared stale generated Next.js development types after removing the route; source configuration was unchanged.
+
+The catalog tests cover nine unique projects, the requested four featured projects, search/category composition, one or two achievements per card, inference/scheduler caveats, rendered GitHub actions, absence of internal detail-page links, and omission of unavailable external actions. A synthetic demo fixture verifies the optional demo branch without adding a demo to the actual catalog.
+
+Browser visual/mobile QA remains unverified because no connected browser was available in this session. Changes are local; no commit, push, or deployment was performed.
