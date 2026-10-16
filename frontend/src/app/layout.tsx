@@ -1,61 +1,12 @@
-import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Furnom Dam | CS Senior & Software Engineer",
-  description: "Portfolio of Furnom Dam, Computer Science Senior at UMBC. Interested in Software Engineering, AI/ML, and building innovative solutions.",
-  keywords: "Furnom Dam, Software Engineer, Computer Science, UMBC, AI/ML, Portfolio",
-  authors: [{ name: "Furnom Dam" }],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://furnomdam.com",
-    title: "Furnom Dam | CS Senior & Software Engineer",
-    description: "Portfolio of Furnom Dam, Computer Science Senior at UMBC",
-    siteName: "Furnom Studio",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Furnom Dam | CS Senior & Software Engineer",
-    description: "Portfolio of Furnom Dam, Computer Science Senior at UMBC",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#0f172a" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[var(--background)] text-[var(--foreground)]`}
-        role="application"
-      >
-        {children}
-        <Analytics />
-      </body>
-    </html>
-  );
-}
+import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import Header from '@/components/layout/header';
+import Footer from '@/components/layout/footer';
+import './globals.css';
+const sans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
+const mono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
+export const metadata: Metadata = { title: { default: 'Furnom Dam | Software Engineer', template: '%s | Furnom Dam' }, description: 'UMBC Computer Science graduate building backend systems, cloud infrastructure, and intelligent applications. Explore engineering projects by Furnom Dam.', authors: [{ name: 'Furnom Dam' }], openGraph: { type: 'website', locale: 'en_US', title: 'Furnom Dam | Software Engineer', description: 'Backend systems, cloud infrastructure, and intelligent applications.', siteName: 'Furnom Studio' }, twitter: { card: 'summary', title: 'Furnom Dam | Software Engineer', description: 'Backend systems, cloud infrastructure, and intelligent applications.' } };
+export default function RootLayout({ children }: {
+    children: React.ReactNode;
+}) { return <html lang="en"><body className={`${sans.variable} ${mono.variable}`}><a className="skip-link" href="#main">Skip to content</a><Header />{children}<Footer /><Analytics /></body></html>; }

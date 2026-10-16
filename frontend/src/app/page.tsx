@@ -1,138 +1,17 @@
-'use client';
-
-import { useEffect } from 'react';
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
-import ProjectCard from '@/components/projects/ProjectCard';
-import ProjectSkeleton from '@/components/projects/ProjectSkeleton';
-import ScheduleCard from '@/components/Schedule/scheduleCard';
-import SkillsSection from '@/components/skills/SkillsSection';
-import { useProjects } from '@/hooks/useProjects';
-
+import Link from 'next/link';
+import { ArrowDown, ArrowUpRight, Github, Linkedin, Download, Terminal, Layers, Cpu, Code2 } from 'lucide-react';
+import PortfolioCard from '@/components/projects/PortfolioCard';
+import { projects } from '@/lib/projects';
+const skills = [['Programming languages', 'Python / Go / TypeScript / JavaScript / C / C++ / Java / SQL'], ['Backend engineering', 'FastAPI / Flask / Node.js / Express.js / Gin / REST APIs'], ['Frontend engineering', 'React / Next.js / Tailwind CSS'], ['Databases & caching', 'PostgreSQL / MySQL / MongoDB / Redis'], ['Cloud & infrastructure', 'AWS / Google Cloud / Docker / Kubernetes / Terraform / GitHub Actions / Linux'], ['AI & machine learning', 'PyTorch / scikit-learn / XGBoost / SHAP / vLLM / RAG']];
 export default function Home() {
-  // Preload projects in the background
-  useEffect(() => {
-    // Warm up the API cache
-    fetch('/api/projects').catch(() => {});
-  }, []);
-
-  const { projects, loading, error, refetch } = useProjects();
-
-  return (
-    <>
-      <Header />
-
-      {/* Hero Section */}
-      <section id="hero" className="relative overflow-hidden px-6 pb-20 pt-28" aria-label="Hero">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(37,99,235,0.14),transparent_32%),radial-gradient(circle_at_top_right,rgba(15,118,110,0.10),transparent_28%)]" />
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center rounded-full border border-blue-200 bg-white/80 px-4 py-1 text-sm font-medium text-blue-700 shadow-sm backdrop-blur">
-              Open to SWE roles and collaboration
-            </span>
-            <h1 className="mt-6 text-5xl font-semibold tracking-tight text-slate-950 sm:text-6xl">
-              Furnom Dam
-            </h1>
-            <p className="mt-4 text-xl text-slate-700 sm:text-2xl">
-              Computer Science Senior · University of Maryland, Baltimore County
-            </p>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              I focus on building reliable systems that power applications, while also working on AI/ML projects that solve real problems.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a href="#projects" className="rounded-full bg-slate-950 px-6 py-3 font-semibold text-white shadow-lg shadow-slate-950/15 transition hover:-translate-y-0.5 hover:bg-slate-800">
-                View Projects
-              </a>
-              <a href="/myresume.pdf" target="_blank" rel="noopener noreferrer" className="rounded-full border border-slate-300 bg-white/90 px-6 py-3 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-400 hover:bg-white">
-                Resume
-              </a>
-              <a href="#schedule" className="rounded-full border border-slate-300 px-6 py-3 font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:border-slate-400 hover:bg-white/80">
-                Schedule a Chat
-              </a>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-3 text-sm text-slate-600">
-              <span className="rounded-full bg-white/70 px-3 py-1 shadow-sm ring-1 ring-slate-200">Next.js</span>
-              <span className="rounded-full bg-white/70 px-3 py-1 shadow-sm ring-1 ring-slate-200">AI / ML</span>
-              <span className="rounded-full bg-white/70 px-3 py-1 shadow-sm ring-1 ring-slate-200">Backend APIs</span>
-              <span className="rounded-full bg-white/70 px-3 py-1 shadow-sm ring-1 ring-slate-200">Systems Thinking</span>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-br from-slate-900/10 via-white/80 to-amber-100/60 blur-2xl" />
-            <div className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.10)] backdrop-blur">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Highlights</p>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl bg-slate-950 p-5 text-white shadow-lg shadow-slate-950/10">
-                  <p className="text-sm text-slate-300">Focus</p>
-                  <p className="mt-2 text-xl font-semibold">Building reliable systems for applications</p>
-                </div>
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                  <p className="text-sm text-slate-500">Strength</p>
-                  <p className="mt-2 text-xl font-semibold text-slate-900">Backend, Full-Stack & Systems, AI/ML</p>
-                </div>
-                <div className="rounded-2xl bg-amber-50 p-5 ring-1 ring-amber-200 sm:col-span-2">
-                  <p className="text-sm text-amber-700">Available for</p>
-                  <p className="mt-2 text-xl font-semibold text-slate-900">SWE roles and collaboration</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="px-6 py-20" aria-label="Featured projects">
-        <div className="mx-auto max-w-6xl rounded-[2rem] border border-white/60 bg-white/75 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur sm:p-10">
-          <h2 className="mb-12 text-slate-950" role="heading" aria-level={2}>Projects</h2>
-          {loading && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <ProjectSkeleton key={i} />
-              ))}
-            </div>
-          )}
-          {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-              <p className="text-red-700">{error}</p>
-              <button 
-                onClick={refetch}
-                className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
-              >
-                Try Again
-              </button>
-            </div>
-          )}
-          {!loading && projects.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {projects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  name={project.name}
-                  description={project.description}
-                  techStack={project.techStack}
-                  githubUrl={project.githubUrl}
-                />
-              ))}
-            </div>
-          )}
-          {!loading && projects.length === 0 && !error && (
-            <p className="text-center text-slate-500">No projects found.</p>
-          )}
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <SkillsSection />
-
-      {/* Schedule Section */}
-      <section id="schedule" className="px-6 py-20" aria-label="Schedule a call">
-        <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/60 bg-slate-950 px-6 py-10 shadow-[0_20px_60px_rgba(15,23,42,0.18)] sm:px-10">
-          <ScheduleCard bookingUrl="https://calendly.com/jlc10291/30min" />
-        </div>
-      </section>
-
-      <Footer />
-    </>
-  );
+    return <main id="main">
+ <section className="hero shell" id="hero"><div className="hero-copy"><p className="availability"><span /> Open to software engineering opportunities</p><p className="eyebrow hero-name">FURNOM DAM / SOFTWARE ENGINEER</p><h1>Building reliable<br />systems. <span>Intelligent<br />applications.</span></h1><p className="hero-description">I am a Computer Science graduate from UMBC, building the systems behind modern applications - from backend APIs and distributed infrastructure to AI-powered products.</p><p className="hero-specialties">Backend systems <span>/</span> Cloud infrastructure <span>/</span> AI engineering</p><div className="hero-actions"><Link className="button primary" href="#projects">Explore my work <ArrowDown size={17}/></Link><a className="button" href="/myresume.pdf" download>Download resume <Download size={16}/></a></div><div className="social-links"><a href="https://github.com/ZanyDruid20" target="_blank" rel="noopener noreferrer"><Github size={17}/> GitHub <ArrowUpRight size={13}/></a><a href="https://www.linkedin.com/in/furnom-dam/" target="_blank" rel="noopener noreferrer"><Linkedin size={17}/> LinkedIn <ArrowUpRight size={13}/></a><a href="#contact">Get in touch <ArrowUpRight size={13}/></a></div></div>
+ <div className="hero-system" aria-label="Engineering focus: application services, infrastructure, and inference"><div className="system-top"><span><Terminal size={14}/> engineering.workspace</span><span className="system-dots">...</span></div><div className="system-content"><p className="eyebrow">FROM REQUEST TO RESPONSE</p><div className="system-node"><Code2 /><div><strong>Application layer</strong><small>APIs / data workflows / interfaces</small></div><span>01</span></div><div className="system-connector"/><div className="system-node"><Layers /><div><strong>Distributed infrastructure</strong><small>Containers / orchestration / cloud</small></div><span>02</span></div><div className="system-connector"/><div className="system-node"><Cpu /><div><strong>Intelligence & inference</strong><small>Retrieval / models / evaluation</small></div><span>03</span></div><div className="system-bottom"><span className="status-dot"/> Designed to work together.</div></div></div>
+ </section><div className="focus-strip"><div className="shell"><span>ENGINEERING ACROSS THE STACK</span><p>Backend <b>+</b> Distributed systems <b>+</b> Cloud <b>+</b> AI infrastructure</p></div></div>
+ <section id="projects" className="section shell"><div className="section-heading"><div><p className="eyebrow">01 / SELECTED WORK</p><h2>Built to solve real problems.</h2><p className="muted">Four projects at the intersection of software, systems, and intelligence.</p></div><Link href="/projects" className="text-link">All 9 projects <ArrowUpRight size={17}/></Link></div><div className="project-grid">{projects.filter(p => p.featured).map((p, i) => <PortfolioCard key={p.slug} project={p} index={i}/>)}</div></section>
+ <section id="about" className="section shell about"><div><p className="eyebrow">02 / ABOUT ME</p><h2>Curious about what<br />happens underneath.</h2></div><div><p className="lead">I enjoy understanding how systems work internally - and making them work better.</p><p className="muted">I graduated from the University of Maryland, Baltimore County in May 2026 with a B.S. in Computer Science. My work spans backend APIs, full-stack applications, and AI-powered tools.</p><p className="muted">I am particularly interested in backend and infrastructure engineering: distributed systems, performance optimization, and the decisions that make software reliable. I like working through practical technical problems, measuring the results, and learning from the trade-offs.</p><a className="text-link" href="/myresume.pdf">Read my resume <ArrowUpRight size={16}/></a></div></section>
+ <section id="skills" className="section shell"><p className="eyebrow">03 / TOOLKIT</p><h2>The tools behind the work.</h2><div className="skills-grid">{skills.map(([title, items], i) => <div className="skill" key={title}><span className="skill-number">0{i + 1}</span><h3>{title}</h3><p>{items}</p></div>)}</div></section>
+ <section id="education" className="section shell education"><div><p className="eyebrow">04 / EDUCATION</p><h2>A foundation in computer science.</h2></div><div className="education-card"><span className="degree-mark">UMBC</span><div><h3>University of Maryland, Baltimore County</h3><p className="muted">Bachelor of Science in Computer Science</p></div><span className="eyebrow">GRADUATED MAY 2026</span></div></section>
+ <section id="contact" className="section shell"><div className="contact-panel"><p className="eyebrow">05 / WHAT IS NEXT</p><h2>Let us build something<br />that works.</h2><p className="muted">Have an engineering opportunity or a technical problem to discuss? I would like to hear about it.</p><div className="hero-actions"><a className="button primary" href="mailto:furnomd1@umbc.edu">furnomd1@umbc.edu <ArrowUpRight size={17}/></a><a id="schedule" className="button" href="https://calendly.com/jlc10291/30min" target="_blank" rel="noopener noreferrer">Schedule a 30-minute chat <ArrowUpRight size={17}/></a></div></div></section>
+ </main>;
 }
