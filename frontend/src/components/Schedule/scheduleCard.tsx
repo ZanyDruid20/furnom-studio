@@ -16,22 +16,22 @@ export default function ScheduleCard({
   bookingUrl = "https://calendly.com"
 }: ScheduleCardProps) {
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-8 max-w-md mx-auto shadow-sm">
+    <div className="bg-panel border border-line rounded-lg p-8 max-w-md mx-auto shadow-sm">
       <div className="flex items-center justify-center gap-3 mb-4">
-        <Calendar className="w-6 h-6 text-blue-600" />
-        <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+        <Calendar className="w-6 h-6 text-accent" />
+        <h3 className="text-xl font-semibold text-foreground">{title}</h3>
       </div>
       
-      <p className="text-gray-600 text-center mb-6 leading-relaxed">
+      <p className="text-muted-on-warm text-center mb-6 leading-relaxed">
         {description}
       </p>
       
-      <div className="bg-gray-50 rounded-lg p-4 mb-6 border border-gray-100">
-        <div className="flex items-center gap-3 text-gray-700">
-          <Clock className="w-5 h-5 text-gray-400" />
+      <div className="bg-background rounded-lg p-4 mb-6 border border-line">
+        <div className="flex items-center gap-3 text-foreground">
+          <Clock className="w-5 h-5 text-muted-on-warm" />
           <div>
             <p className="font-medium">{duration}</p>
-            <p className="text-sm text-gray-500">{meetingType}</p>
+            <p className="text-sm text-muted-on-warm">{meetingType}</p>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@ export default function ScheduleCard({
         href={bookingUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2"
+        className="w-full px-6 py-3 bg-accent text-panel rounded-lg font-medium hover:bg-foreground transition-all shadow-sm hover:shadow-sm flex items-center justify-center gap-2"
       >
         <Calendar className="w-5 h-5" />
         Book a Meeting

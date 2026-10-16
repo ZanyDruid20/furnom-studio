@@ -42,7 +42,7 @@ export default function Modal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" aria-hidden="true" />
+          <div className="fixed inset-0 bg-background/80 backdrop-blur-sm" aria-hidden="true" />
         </TransitionChild>
 
         {/* Modal container */}
@@ -58,7 +58,7 @@ export default function Modal({
           >
             <DialogPanel
               className={twMerge(
-                "relative w-full rounded-lg bg-white shadow-xl",
+                "relative w-full rounded-lg bg-panel shadow-sm",
                 sizeClasses[size],
                 className
               )}
@@ -67,7 +67,7 @@ export default function Modal({
               {showCloseButton && (
                 <button
                   onClick={onClose}
-                  className="absolute right-4 top-4 rounded-md p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  className="absolute right-4 top-4 rounded-md p-1 text-muted-on-warm transition-colors hover:bg-hover hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   aria-label="Close modal"
                 >
                   <XMarkIcon className="h-5 w-5" />
@@ -77,7 +77,7 @@ export default function Modal({
               {/* Content */}
               <div className="p-6">
                 {title && (
-                  <DialogTitle className="mb-4 text-2xl font-semibold text-gray-900">
+                  <DialogTitle className="mb-4 text-2xl font-semibold text-foreground">
                     {title}
                   </DialogTitle>
                 )}

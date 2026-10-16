@@ -11,8 +11,8 @@ export default function Button({ children, variant = 'primary', href, onClick }:
   const baseClasses = "px-6 py-3 rounded-lg font-medium transition-all inline-flex items-center justify-center";
   
   const variantClasses = {
-    primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-sm hover:shadow-md",
-    secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200"
+    primary: "bg-accent text-panel hover:text-panel hover:bg-foreground active:bg-foreground active:text-panel shadow-sm hover:shadow-sm",
+    secondary: "bg-hover text-foreground hover:bg-hover"
   };
 
   const classes = `${baseClasses} ${variantClasses[variant]}`;
